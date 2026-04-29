@@ -21,19 +21,7 @@ import {
   Target,
 } from "lucide-react"
 
-// ============================================
-// COMPONENTES REUTILIZABLES
-// ============================================
-
-function FadeIn({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: React.ReactNode
-  delay?: number
-  className?: string
-}) {
+function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
 
@@ -54,48 +42,32 @@ function FadeIn({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-      } ${className}`}
+      className={`transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} ${className}`}
     >
       {children}
     </div>
   )
 }
 
-function SectionTitle({
-  eyebrow,
-  title,
-  description,
-  centered = true,
-}: {
-  eyebrow?: string
-  title: string
-  description?: string
-  centered?: boolean
-}) {
+function SectionTitle({ eyebrow, title, description, centered = true, dark = false }: { eyebrow?: string; title: string; description?: string; centered?: boolean; dark?: boolean }) {
   return (
     <div className={`mb-16 ${centered ? "text-center" : ""}`}>
       {eyebrow && (
-        <span className="inline-block text-accent text-sm font-semibold tracking-wider uppercase mb-4">
+        <span className={`inline-block text-sm font-semibold tracking-wider uppercase mb-4 ${dark ? "text-blue-300" : "text-accent"}`}>
           {eyebrow}
         </span>
       )}
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
+      <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6 ${dark ? "text-white" : "text-foreground"}`}>
         {title}
       </h2>
       {description && (
-        <p className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+        <p className={`text-lg md:text-xl max-w-3xl mx-auto leading-relaxed ${dark ? "text-blue-200" : "text-muted-foreground"}`}>
           {description}
         </p>
       )}
     </div>
   )
 }
-
-// ============================================
-// SECCIONES
-// ============================================
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -115,68 +87,40 @@ function Navbar() {
   ]
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border"
-          : "bg-transparent"
-      }`}
-    >
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/90 backdrop-blur-xl border-b border-border shadow-sm" : "bg-transparent"}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <a href="#" className="text-2xl font-bold text-foreground tracking-tight">
             e<span className="text-accent">Quantum</span>
           </a>
 
-          {/* Desktop */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
+              <a key={link.href} href={link.href} className="text-sm text-muted hover:text-foreground transition-colors">
                 {link.label}
               </a>
             ))}
-            <a
-              href="#contacto"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-background text-sm font-semibold rounded-full hover:bg-accent-hover transition-colors"
-            >
+            <a href="#contacto" className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-white text-sm font-semibold rounded-lg hover:bg-accent-hover transition-colors">
               Agendar sesión
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>
 
-          {/* Mobile toggle */}
-          <button
-            className="md:hidden text-foreground"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
+          <button className="md:hidden text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-background border-b border-border">
+        <div className="md:hidden bg-white border-b border-border">
           <div className="px-6 py-6 space-y-4">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="block text-muted-foreground hover:text-foreground transition-colors"
-                onClick={() => setMobileOpen(false)}
-              >
+              <a key={link.href} href={link.href} className="block text-muted hover:text-foreground transition-colors" onClick={() => setMobileOpen(false)}>
                 {link.label}
               </a>
             ))}
-            <a
-              href="#contacto"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-background text-sm font-semibold rounded-full"
-              onClick={() => setMobileOpen(false)}
-            >
+            <a href="#contacto" className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-white text-sm font-semibold rounded-lg" onClick={() => setMobileOpen(false)}>
               Agendar sesión
               <ArrowRight className="w-4 h-4" />
             </a>
@@ -189,52 +133,38 @@ function Navbar() {
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-background">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-accent/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[100px]" />
-      </div>
-
+    <section className="relative min-h-screen flex items-center justify-center bg-white pt-20">
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50/30" />
+      
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
         <FadeIn>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border mb-8">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            <span className="text-sm text-muted-foreground">
-              Consultoría tecnológica senior
-            </span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-8">
+            <span className="w-2 h-2 rounded-full bg-accent" />
+            <span className="text-sm text-accent font-medium">Consultoría tecnológica senior</span>
           </div>
         </FadeIn>
 
         <FadeIn delay={100}>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] mb-8">
             Arquitectura digital que{" "}
-            <span className="text-gradient">convierte mejor</span> y escala con
-            criterio.
+            <span className="text-gradient">convierte mejor</span> y escala con criterio.
           </h1>
         </FadeIn>
 
         <FadeIn delay={200}>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
             Transformamos tu presencia digital en un activo comercial: más credibilidad,
-            mejor jerarquía de propuesta y un sistema diseñado para generar demanda
-            calificada.
+            mejor jerarquía de propuesta y un sistema diseñado para generar demanda calificada.
           </p>
         </FadeIn>
 
         <FadeIn delay={300}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <a
-              href="#contacto"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-accent text-background font-semibold rounded-full hover:bg-accent-hover transition-all hover:scale-105"
-            >
+            <a href="#contacto" className="inline-flex items-center gap-3 px-8 py-4 bg-accent text-white font-semibold rounded-lg hover:bg-accent-hover transition-all hover:scale-105 shadow-lg shadow-accent/25">
               Solicitar diagnóstico estratégico
               <ArrowRight className="w-5 h-5" />
             </a>
-            <a
-              href="#servicios"
-              className="inline-flex items-center gap-2 px-8 py-4 border border-border text-foreground font-semibold rounded-full hover:bg-card transition-all"
-            >
+            <a href="#servicios" className="inline-flex items-center gap-2 px-8 py-4 border border-border text-foreground font-semibold rounded-lg hover:bg-card transition-all">
               Ver servicios
               <ChevronRight className="w-5 h-5" />
             </a>
@@ -257,13 +187,6 @@ function Hero() {
             </div>
           </div>
         </FadeIn>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-muted rounded-full flex justify-center pt-2">
-          <div className="w-1.5 h-1.5 bg-accent rounded-full" />
-        </div>
       </div>
     </section>
   )
@@ -289,7 +212,7 @@ function Problems() {
   ]
 
   return (
-    <section className="py-24 md:py-32 bg-neutral-950">
+    <section className="py-24 md:py-32 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <FadeIn>
           <SectionTitle
@@ -301,7 +224,7 @@ function Problems() {
         <div className="grid md:grid-cols-3 gap-8">
           {problems.map((problem, i) => (
             <FadeIn key={i} delay={i * 150}>
-              <div className="group p-8 rounded-2xl bg-card border border-border hover:border-accent/30 transition-all hover:-translate-y-1">
+              <div className="group p-8 rounded-2xl bg-white border border-border hover:border-accent/30 transition-all hover:-translate-y-1 hover:shadow-lg">
                 <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
                   <problem.icon className="w-6 h-6 text-accent" />
                 </div>
@@ -317,7 +240,7 @@ function Problems() {
         </div>
 
         <FadeIn delay={500}>
-          <div className="mt-16 p-6 md:p-8 rounded-2xl bg-gradient-to-r from-accent/10 to-transparent border border-accent/20">
+          <div className="mt-16 p-6 md:p-8 rounded-2xl bg-accent/5 border border-accent/10">
             <div className="flex items-start gap-4">
               <Zap className="w-8 h-8 text-accent flex-shrink-0 mt-1" />
               <div>
@@ -326,7 +249,6 @@ function Problems() {
                 </p>
                 <p className="text-muted-foreground">
                   Mapa de oportunidades, quick wins y plan de implementación por fases.
-                  Sin compromiso de largo plazo hasta que veas valor real.
                 </p>
               </div>
             </div>
@@ -396,7 +318,7 @@ function Services() {
   ]
 
   return (
-    <section id="servicios" className="py-24 md:py-32 bg-background">
+    <section id="servicios" className="py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <FadeIn>
           <SectionTitle
@@ -408,7 +330,7 @@ function Services() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, i) => (
             <FadeIn key={i} delay={i * 100}>
-              <div className="group h-full p-8 rounded-2xl bg-card border border-border hover:border-accent/30 transition-all hover:-translate-y-1 flex flex-col">
+              <div className="group h-full p-8 rounded-2xl bg-card border border-border hover:border-accent/30 transition-all hover:-translate-y-1 hover:shadow-lg flex flex-col">
                 <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
                   <service.icon className="w-6 h-6 text-accent" />
                 </div>
@@ -446,9 +368,7 @@ function About() {
   ]
 
   return (
-    <section id="nosotros" className="py-24 md:py-32 bg-neutral-950 relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
-
+    <section id="nosotros" className="py-24 md:py-32 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <FadeIn>
           <div className="text-center mb-16">
@@ -460,8 +380,7 @@ function About() {
             </h2>
             <p className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
               Coordinamos negocio, marketing y producto para que cada decisión digital
-              responda a objetivos comerciales concretos. Menos improvisación, más foco,
-              más trazabilidad.
+              responda a objetivos comerciales concretos.
             </p>
           </div>
         </FadeIn>
@@ -469,8 +388,8 @@ function About() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {stats.map((stat, i) => (
             <FadeIn key={i} delay={i * 100}>
-              <div className="text-center p-6 md:p-8 rounded-2xl bg-card border border-border">
-                <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-accent mb-2">
+              <div className="text-center p-6 md:p-8 rounded-2xl bg-white border border-border">
+                <div className="text-3xl md:text-4xl font-bold text-accent mb-2">
                   {stat.number}
                 </div>
                 <div className="text-sm text-muted-foreground">{stat.label}</div>
@@ -488,8 +407,7 @@ function Cases() {
     {
       client: "Marmolería Pietra",
       challenge: "Posicionarse en proyectos premium y mejorar calidad de consultas",
-      intervention:
-        "Nuevo sitio con narrativa B2B y estructura de conversión por tipo de proyecto",
+      intervention: "Nuevo sitio con narrativa B2B y estructura de conversión por tipo de proyecto",
       result: "+41%",
       resultLabel: "consultas calificadas en 90 días",
       tags: ["Sitio corporativo", "B2B"],
@@ -497,8 +415,7 @@ function Cases() {
     {
       client: "Corpicia",
       challenge: "Oferta técnica sólida, comunicación digital dispersa",
-      intervention:
-        "Reposicionamiento de propuesta y arquitectura de servicios para venta consultiva",
+      intervention: "Reposicionamiento de propuesta y arquitectura de servicios para venta consultiva",
       result: "↓",
       resultLabel: "ciclos de venta más cortos",
       tags: ["Ecommerce", "Reposicionamiento"],
@@ -506,8 +423,7 @@ function Cases() {
     {
       client: "Expansión Regional B2B",
       challenge: "Escalar a nuevas plazas sin perder consistencia ni eficiencia",
-      intervention:
-        "Ecosistema modular multicanal con governance de contenidos y medición",
+      intervention: "Ecosistema modular multicanal con governance de contenidos y medición",
       result: "Semanas",
       resultLabel: "despliegue regional, no meses",
       tags: ["Multicanal", "Escalabilidad"],
@@ -515,8 +431,7 @@ function Cases() {
     {
       client: "RMI S.R.L",
       challenge: "Aprobaciones informales por WhatsApp/Excel, sin trazabilidad",
-      intervention:
-        "Plataforma centralizada con flujos configurables y historial completo",
+      intervention: "Plataforma centralizada con flujos configurables y historial completo",
       result: "1 clic",
       resultLabel: "auditoría lista, cero dependencia",
       tags: ["Gestión interna", "SAP"],
@@ -524,7 +439,7 @@ function Cases() {
   ]
 
   return (
-    <section id="casos" className="py-24 md:py-32 bg-background">
+    <section id="casos" className="py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <FadeIn>
           <SectionTitle
@@ -536,13 +451,10 @@ function Cases() {
         <div className="grid md:grid-cols-2 gap-6">
           {cases.map((c, i) => (
             <FadeIn key={i} delay={i * 100}>
-              <div className="group p-8 rounded-2xl bg-card border border-border hover:border-accent/30 transition-all hover:-translate-y-1">
+              <div className="group p-8 rounded-2xl bg-card border border-border hover:border-accent/30 transition-all hover:-translate-y-1 hover:shadow-lg">
                 <div className="flex flex-wrap gap-2 mb-6">
                   {c.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 text-xs font-medium text-accent bg-accent/10 rounded-full"
-                    >
+                    <span key={tag} className="px-3 py-1 text-xs font-medium text-accent bg-accent/10 rounded-full">
                       {tag}
                     </span>
                   ))}
@@ -554,15 +466,11 @@ function Cases() {
 
                 <div className="space-y-4 mb-8">
                   <div>
-                    <p className="text-xs text-muted uppercase tracking-wider mb-1">
-                      Desafío
-                    </p>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Desafío</p>
                     <p className="text-muted-foreground text-sm">{c.challenge}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-muted uppercase tracking-wider mb-1">
-                      Intervención
-                    </p>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Intervención</p>
                     <p className="text-muted-foreground text-sm">{c.intervention}</p>
                   </div>
                 </div>
@@ -588,34 +496,14 @@ function Cases() {
 
 function Process() {
   const steps = [
-    {
-      number: "01",
-      title: "Diagnóstico",
-      desc: "Auditamos situación actual, puntos de fuga y oportunidades de captura de demanda.",
-      icon: Target,
-    },
-    {
-      number: "02",
-      title: "Blueprint",
-      desc: "Diseñamos estructura, mensajes, journeys y stack tecnológico con prioridades concretas.",
-      icon: Layers,
-    },
-    {
-      number: "03",
-      title: "Implementación",
-      desc: "Ejecutamos con entregables iterativos para generar valor temprano y controlar riesgos.",
-      icon: Zap,
-    },
-    {
-      number: "04",
-      title: "Optimización",
-      desc: "Medimos resultados, iteramos y alineamos evolución digital con objetivos comerciales.",
-      icon: TrendingUp,
-    },
+    { number: "01", title: "Diagnóstico", desc: "Auditamos situación actual, puntos de fuga y oportunidades de captura de demanda.", icon: Target },
+    { number: "02", title: "Blueprint", desc: "Diseñamos estructura, mensajes, journeys y stack tecnológico con prioridades concretas.", icon: Layers },
+    { number: "03", title: "Implementación", desc: "Ejecutamos con entregables iterativos para generar valor temprano y controlar riesgos.", icon: Zap },
+    { number: "04", title: "Optimización", desc: "Medimos resultados, iteramos y alineamos evolución digital con objetivos comerciales.", icon: TrendingUp },
   ]
 
   return (
-    <section id="proceso" className="py-24 md:py-32 bg-neutral-950">
+    <section id="proceso" className="py-24 md:py-32 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <FadeIn>
           <SectionTitle
@@ -627,7 +515,7 @@ function Process() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step, i) => (
             <FadeIn key={i} delay={i * 100}>
-              <div className="relative p-8 rounded-2xl bg-card border border-border h-full">
+              <div className="relative p-8 rounded-2xl bg-white border border-border h-full">
                 <div className="text-5xl font-bold text-accent/20 mb-4">
                   {step.number}
                 </div>
@@ -651,21 +539,19 @@ function Process() {
 
 function CTA() {
   return (
-    <section id="contacto" className="py-24 md:py-32 bg-background relative overflow-hidden">
-      <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[120px]" />
-      </div>
-
+    <section id="contacto" className="py-24 md:py-32 bg-[#223663] relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#3A4C74]/20 to-transparent" />
+      
       <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
         <FadeIn>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-8">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8">
             Si tu presencia digital no acompaña tu nivel de negocio,{" "}
-            <span className="text-gradient">es momento de corregirlo</span>.
+            <span className="text-blue-300">es momento de corregirlo</span>.
           </h2>
         </FadeIn>
 
         <FadeIn delay={150}>
-          <p className="text-lg md:text-xl text-muted-foreground mb-12 leading-relaxed">
+          <p className="text-lg md:text-xl text-blue-200 mb-12 leading-relaxed">
             Coordinemos una sesión estratégica de 30 minutos para identificar brechas
             críticas y definir un plan de evolución realista para los próximos 90 días.
           </p>
@@ -673,19 +559,11 @@ function CTA() {
 
         <FadeIn delay={300}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <a
-              href="https://wa.me/595XXXXXXXX"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-accent text-background font-semibold rounded-full hover:bg-accent-hover transition-all hover:scale-105"
-            >
+            <a href="https://wa.me/595XXXXXXXX" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#223663] font-semibold rounded-lg hover:bg-blue-50 transition-all hover:scale-105">
               <MessageSquare className="w-5 h-5" />
               Agendar sesión estratégica
             </a>
-            <a
-              href="mailto:contacto@equantum.com.py"
-              className="inline-flex items-center gap-2 px-8 py-4 border border-border text-foreground font-semibold rounded-full hover:bg-card transition-all"
-            >
+            <a href="mailto:contacto@equantum.com.py" className="inline-flex items-center gap-2 px-8 py-4 border border-blue-400/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-all">
               contacto@equantum.com.py
               <ArrowUpRight className="w-4 h-4" />
             </a>
@@ -693,17 +571,17 @@ function CTA() {
         </FadeIn>
 
         <FadeIn delay={400}>
-          <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
+          <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-blue-300">
             <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-accent" />
+              <Clock className="w-4 h-4" />
               <span>Respuesta en 24 horas</span>
             </div>
             <div className="flex items-center gap-2">
-              <Users className="w-4 h-4 text-accent" />
+              <Users className="w-4 h-4" />
               <span>Sesión con director ejecutivo</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-accent" />
+              <CheckCircle2 className="w-4 h-4" />
               <span>Sin costo, sin compromiso</span>
             </div>
           </div>
@@ -715,23 +593,19 @@ function CTA() {
 
 function Footer() {
   return (
-    <footer className="py-12 bg-neutral-950 border-t border-border">
+    <footer className="py-12 bg-[#1a2a4a] border-t border-blue-800/30">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="text-2xl font-bold text-foreground tracking-tight">
-            e<span className="text-accent">Quantum</span>
+          <div className="text-2xl font-bold text-white tracking-tight">
+            e<span className="text-blue-300">Quantum</span>
           </div>
 
-          <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <a href="#" className="hover:text-foreground transition-colors">
-              Política de privacidad
-            </a>
-            <a href="#" className="hover:text-foreground transition-colors">
-              Términos de servicio
-            </a>
+          <div className="flex items-center gap-6 text-sm text-blue-300">
+            <a href="#" className="hover:text-white transition-colors">Política de privacidad</a>
+            <a href="#" className="hover:text-white transition-colors">Términos de servicio</a>
           </div>
 
-          <div className="text-sm text-muted-foreground">
+          <div className="text-sm text-blue-400">
             © 2026 eQuantum. Todos los derechos reservados.
           </div>
         </div>
@@ -740,13 +614,9 @@ function Footer() {
   )
 }
 
-// ============================================
-// PAGE
-// ============================================
-
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-white">
       <Navbar />
       <Hero />
       <Problems />

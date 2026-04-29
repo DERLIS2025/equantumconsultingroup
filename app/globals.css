@@ -6,15 +6,17 @@
 
 @layer base {
   :root {
-    --background: #223663;
-    --foreground: #FFFFFF;
+    --background: #FFFFFF;
+    --foreground: #1a1a2e;
     --accent: #3A4C74;
-    --accent-hover: #4A5C84;
-    --muted: #6B7FA3;
-    --muted-foreground: #9BAAC4;
-    --card: #2D3F5F;
-    --card-hover: #354A6B;
-    --border: #3A4C74;
+    --accent-hover: #2a3c64;
+    --muted: #64748b;
+    --muted-foreground: #94a3b8;
+    --card: #f8fafc;
+    --card-hover: #f1f5f9;
+    --border: #e2e8f0;
+    --dark-bg: #223663;
+    --dark-card: #2D3F5F;
   }
 
   * {
@@ -30,17 +32,17 @@
   }
 
   ::selection {
-    background-color: rgba(58, 76, 116, 0.4);
-    color: #FFFFFF;
+    background-color: rgba(58, 76, 116, 0.15);
+    color: #1a1a2e;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-[#9BAAC4];
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#3A4C74] to-[#64748b];
   }
 
   .glass {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+    @apply bg-white/80 backdrop-blur-xl border border-border;
   }
 }
