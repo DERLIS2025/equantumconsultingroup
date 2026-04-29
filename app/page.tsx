@@ -77,12 +77,10 @@ function RotatingText() {
   }, [])
 
   return (
-    <div className="mb-6">
-      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#3A4C74]/10 border border-[#3A4C74]/20">
-        <span className={`text-lg md:text-xl font-semibold text-[#3A4C74] tracking-wide transition-opacity duration-300 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
-          {phrases[current]}
-        </span>
-      </div>
+    <div className="mb-8">
+      <span className={`text-xl md:text-2xl font-medium text-blue-200 transition-opacity duration-300 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
+        {phrases[current]}
+      </span>
     </div>
   )
 }
@@ -119,40 +117,40 @@ function Navbar() {
   ]
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white border-b border-gray-200 shadow-sm" : "bg-white"}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-[#223663]/95 backdrop-blur-md border-b border-white/10 shadow-lg" : "bg-transparent"}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <a href="#" className="text-2xl font-bold text-gray-900 tracking-tight">
-            e<span className="text-[#3A4C74]">Quantum</span>
+          <a href="#" className="text-2xl font-bold text-white tracking-tight">
+            e<span className="text-blue-300">Quantum</span>
           </a>
 
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+              <a key={link.href} href={link.href} className="text-sm text-blue-200 hover:text-white transition-colors">
                 {link.label}
               </a>
             ))}
-            <a href="https://wa.me/595985194953" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#3A4C74] text-white text-sm font-semibold rounded-lg hover:bg-[#2a3c64] transition-colors">
+            <a href="https://wa.me/595985194953" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-[#223663] text-sm font-semibold rounded-lg hover:bg-blue-50 transition-colors">
               Agendar sesión
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>
 
-          <button className="md:hidden text-gray-900" onClick={() => setMobileOpen(!mobileOpen)}>
+          <button className="md:hidden text-white" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden bg-white border-b border-gray-200">
+        <div className="md:hidden bg-[#223663] border-b border-white/10">
           <div className="px-6 py-6 space-y-4">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="block text-gray-600 hover:text-gray-900 transition-colors" onClick={() => setMobileOpen(false)}>
+              <a key={link.href} href={link.href} className="block text-blue-200 hover:text-white transition-colors" onClick={() => setMobileOpen(false)}>
                 {link.label}
               </a>
             ))}
-            <a href="https://wa.me/595985194953" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#3A4C74] text-white text-sm font-semibold rounded-lg" onClick={() => setMobileOpen(false)}>
+            <a href="https://wa.me/595985194953" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-[#223663] text-sm font-semibold rounded-lg" onClick={() => setMobileOpen(false)}>
               Agendar sesión
               <ArrowRight className="w-4 h-4" />
             </a>
@@ -165,30 +163,46 @@ function Navbar() {
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center bg-white pt-20">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">
+    <section className="relative min-h-screen flex items-center bg-[#223663] pt-20 overflow-hidden">
+      {/* Background pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full blur-[100px]" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-600 rounded-full blur-[120px]" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <FadeIn>
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3A4C74]/10 text-[#3A4C74] text-sm font-medium mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-blue-200 text-sm font-medium mb-6">
                 <Wrench className="w-4 h-4" />
                 Trabajo a medida
               </div>
+
               <RotatingText />
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-[1.1] mb-6">
+
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] mb-6">
                 Arquitectura digital que{" "}
-                <span className="text-[#3A4C74]">convierte mejor</span> y escala con criterio.
+                <span className="relative">
+                  <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-white">
+                    convierte mejor
+                  </span>
+                  <span className="absolute -inset-1 bg-blue-400/20 rounded-lg blur-sm" />
+                </span>{" "}
+                y escala con criterio.
               </h1>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed max-w-xl">
+
+              <p className="text-lg text-blue-200 mb-8 leading-relaxed max-w-xl">
                 No usamos plantillas. Cada proyecto es diseñado desde cero para tu negocio, 
                 tu mercado y tus objetivos comerciales concretos.
               </p>
+
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href="https://wa.me/595985194953" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#3A4C74] text-white font-semibold rounded-lg hover:bg-[#2a3c64] transition-colors">
+                <a href="https://wa.me/595985194953" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-[#223663] font-semibold rounded-lg hover:bg-blue-50 transition-all hover:scale-105 shadow-lg shadow-black/20">
                   Solicitar diagnóstico estratégico
                   <ArrowRight className="w-5 h-5" />
                 </a>
-                <a href="#servicios" className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors">
+                <a href="#servicios" className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors">
                   Ver servicios
                   <ChevronRight className="w-5 h-5" />
                 </a>
@@ -198,21 +212,21 @@ function Hero() {
 
           <FadeIn delay={200}>
             <div className="space-y-4">
-              <div className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-[#3A4C74]/30 transition-colors">
-                <CheckCircle2 className="w-5 h-5 text-[#3A4C74]" />
-                <span className="text-gray-700">60+ Proyectos B2B/Ecommerce</span>
+              <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                <CheckCircle2 className="w-5 h-5 text-blue-300" />
+                <span className="text-blue-100">60+ Proyectos B2B/Ecommerce</span>
               </div>
-              <div className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-[#3A4C74]/30 transition-colors">
-                <CheckCircle2 className="w-5 h-5 text-[#3A4C74]" />
-                <span className="text-gray-700">End-to-end: Estrategia + Diseño + Tech</span>
+              <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                <CheckCircle2 className="w-5 h-5 text-blue-300" />
+                <span className="text-blue-100">End-to-end: Estrategia + Diseño + Tech</span>
               </div>
-              <div className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-[#3A4C74]/30 transition-colors">
-                <CheckCircle2 className="w-5 h-5 text-[#3A4C74]" />
-                <span className="text-gray-700">Entregable inicial en 10 días hábiles</span>
+              <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                <CheckCircle2 className="w-5 h-5 text-blue-300" />
+                <span className="text-blue-100">Entregable inicial en 10 días hábiles</span>
               </div>
-              <div className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-[#3A4C74]/30 transition-colors">
-                <CheckCircle2 className="w-5 h-5 text-[#3A4C74]" />
-                <span className="text-gray-700">Trabajo a medida, sin plantillas</span>
+              <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                <CheckCircle2 className="w-5 h-5 text-blue-300" />
+                <span className="text-blue-100">Trabajo a medida, sin plantillas</span>
               </div>
             </div>
           </FadeIn>
@@ -272,7 +286,7 @@ function Services() {
   ]
 
   return (
-    <section id="servicios" className="py-24 bg-white border-t border-gray-100">
+    <section id="servicios" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <FadeIn>
           <div className="text-center mb-16">
