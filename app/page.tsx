@@ -133,26 +133,26 @@ function Navbar() {
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-white pt-20">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50/30" />
+    <section className="relative min-h-screen flex items-center justify-center bg-[#3A4C74] pt-20">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#3A4C74] via-[#3A4C74] to-[#2a3c64]" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
         <FadeIn>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-8">
-            <span className="w-2 h-2 rounded-full bg-accent" />
-            <span className="text-sm text-accent font-medium">Consultoría tecnológica senior</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-8">
+            <span className="w-2 h-2 rounded-full bg-blue-300" />
+            <span className="text-sm text-blue-200 font-medium">Consultoría tecnológica senior</span>
           </div>
         </FadeIn>
 
         <FadeIn delay={100}>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] mb-8">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-8">
             Arquitectura digital que{" "}
-            <span className="text-gradient">convierte mejor</span> y escala con criterio.
+            <span className="text-blue-300">convierte mejor</span> y escala con criterio.
           </h1>
         </FadeIn>
 
         <FadeIn delay={200}>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg md:text-xl text-blue-200 max-w-3xl mx-auto mb-10 leading-relaxed">
             Transformamos tu presencia digital en un activo comercial: más credibilidad,
             mejor jerarquía de propuesta y un sistema diseñado para generar demanda calificada.
           </p>
@@ -160,11 +160,11 @@ function Hero() {
 
         <FadeIn delay={300}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <a href="#contacto" className="inline-flex items-center gap-3 px-8 py-4 bg-accent text-white font-semibold rounded-lg hover:bg-accent-hover transition-all hover:scale-105 shadow-lg shadow-accent/25">
+            <a href="#contacto" className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#3A4C74] font-semibold rounded-lg hover:bg-blue-50 transition-all hover:scale-105 shadow-lg shadow-black/20">
               Solicitar diagnóstico estratégico
               <ArrowRight className="w-5 h-5" />
             </a>
-            <a href="#servicios" className="inline-flex items-center gap-2 px-8 py-4 border border-border text-foreground font-semibold rounded-lg hover:bg-card transition-all">
+            <a href="#servicios" className="inline-flex items-center gap-2 px-8 py-4 border border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-all">
               Ver servicios
               <ChevronRight className="w-5 h-5" />
             </a>
@@ -172,17 +172,17 @@ function Hero() {
         </FadeIn>
 
         <FadeIn delay={400}>
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 text-sm text-muted-foreground">
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 text-sm text-blue-300">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-accent" />
+              <CheckCircle2 className="w-5 h-5" />
               <span>60+ Proyectos B2B/Ecommerce</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-accent" />
+              <CheckCircle2 className="w-5 h-5" />
               <span>End-to-end</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-accent" />
+              <CheckCircle2 className="w-5 h-5" />
               <span>Entregable en 10 días hábiles</span>
             </div>
           </div>
@@ -212,7 +212,7 @@ function Problems() {
   ]
 
   return (
-    <section className="py-24 md:py-32 bg-slate-50">
+    <section className="py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <FadeIn>
           <SectionTitle
@@ -224,14 +224,14 @@ function Problems() {
         <div className="grid md:grid-cols-3 gap-8">
           {problems.map((problem, i) => (
             <FadeIn key={i} delay={i * 150}>
-              <div className="group p-8 rounded-2xl bg-white border border-border hover:border-accent/30 transition-all hover:-translate-y-1 hover:shadow-lg">
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
-                  <problem.icon className="w-6 h-6 text-accent" />
+              <div className="group p-8 rounded-2xl bg-[#f8fafc] border border-[#e2e8f0] hover:border-[#3A4C74]/30 transition-all hover:-translate-y-1 hover:shadow-lg">
+                <div className="w-12 h-12 rounded-xl bg-[#3A4C74]/10 flex items-center justify-center mb-6 group-hover:bg-[#3A4C74]/20 transition-colors">
+                  <problem.icon className="w-6 h-6 text-[#3A4C74]" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-4 leading-snug">
+                <h3 className="text-xl font-semibold text-[#1a1a2e] mb-4 leading-snug">
                   {problem.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-[#64748b] leading-relaxed">
                   {problem.desc}
                 </p>
               </div>
@@ -240,14 +240,14 @@ function Problems() {
         </div>
 
         <FadeIn delay={500}>
-          <div className="mt-16 p-6 md:p-8 rounded-2xl bg-accent/5 border border-accent/10">
+          <div className="mt-16 p-6 md:p-8 rounded-2xl bg-[#3A4C74]/5 border border-[#3A4C74]/10">
             <div className="flex items-start gap-4">
-              <Zap className="w-8 h-8 text-accent flex-shrink-0 mt-1" />
+              <Zap className="w-8 h-8 text-[#3A4C74] flex-shrink-0 mt-1" />
               <div>
-                <p className="text-lg font-semibold text-foreground mb-2">
+                <p className="text-lg font-semibold text-[#1a1a2e] mb-2">
                   Entregable inicial en 10 días hábiles
                 </p>
-                <p className="text-muted-foreground">
+                <p className="text-[#64748b]">
                   Mapa de oportunidades, quick wins y plan de implementación por fases.
                 </p>
               </div>
@@ -318,35 +318,36 @@ function Services() {
   ]
 
   return (
-    <section id="servicios" className="py-24 md:py-32 bg-white">
+    <section id="servicios" className="py-24 md:py-32 bg-[#223663]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <FadeIn>
           <SectionTitle
             eyebrow="Servicios"
             title="Capacidades para construir y escalar una operación digital seria"
+            dark
           />
         </FadeIn>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, i) => (
             <FadeIn key={i} delay={i * 100}>
-              <div className="group h-full p-8 rounded-2xl bg-card border border-border hover:border-accent/30 transition-all hover:-translate-y-1 hover:shadow-lg flex flex-col">
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
-                  <service.icon className="w-6 h-6 text-accent" />
+              <div className="group h-full p-8 rounded-2xl bg-[#2D3F5F] border border-[#3A4C74]/30 hover:border-[#3A4C74] transition-all hover:-translate-y-1 hover:shadow-xl flex flex-col">
+                <div className="w-12 h-12 rounded-xl bg-[#3A4C74]/20 flex items-center justify-center mb-6 group-hover:bg-[#3A4C74]/30 transition-colors">
+                  <service.icon className="w-6 h-6 text-blue-300" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-4">
+                <h3 className="text-xl font-semibold text-white mb-4">
                   {service.title}
                 </h3>
                 <ul className="space-y-3 mb-6 flex-grow">
                   {service.items.map((item, j) => (
-                    <li key={j} className="flex items-start gap-3 text-muted-foreground text-sm">
-                      <ChevronRight className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                    <li key={j} className="flex items-start gap-3 text-blue-200 text-sm">
+                      <ChevronRight className="w-4 h-4 text-blue-300 flex-shrink-0 mt-0.5" />
                       {item}
                     </li>
                   ))}
                 </ul>
-                <div className="pt-4 border-t border-border">
-                  <p className="text-sm font-medium text-accent">
+                <div className="pt-4 border-t border-[#3A4C74]/30">
+                  <p className="text-sm font-medium text-blue-300">
                     → {service.result}
                   </p>
                 </div>
@@ -368,17 +369,17 @@ function About() {
   ]
 
   return (
-    <section id="nosotros" className="py-24 md:py-32 bg-slate-50">
+    <section id="nosotros" className="py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <FadeIn>
           <div className="text-center mb-16">
-            <span className="inline-block text-accent text-sm font-semibold tracking-wider uppercase mb-4">
+            <span className="inline-block text-[#3A4C74] text-sm font-semibold tracking-wider uppercase mb-4">
               Sobre nosotros
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6 max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a1a2e] leading-tight mb-6 max-w-4xl mx-auto">
               Estrategia, experiencia y tecnología bajo una única dirección ejecutiva
             </h2>
-            <p className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+            <p className="text-[#64748b] text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
               Coordinamos negocio, marketing y producto para que cada decisión digital
               responda a objetivos comerciales concretos.
             </p>
@@ -388,11 +389,11 @@ function About() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {stats.map((stat, i) => (
             <FadeIn key={i} delay={i * 100}>
-              <div className="text-center p-6 md:p-8 rounded-2xl bg-white border border-border">
-                <div className="text-3xl md:text-4xl font-bold text-accent mb-2">
+              <div className="text-center p-6 md:p-8 rounded-2xl bg-[#f8fafc] border border-[#e2e8f0]">
+                <div className="text-3xl md:text-4xl font-bold text-[#3A4C74] mb-2">
                   {stat.number}
                 </div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+                <div className="text-sm text-[#64748b]">{stat.label}</div>
               </div>
             </FadeIn>
           ))}
@@ -439,7 +440,7 @@ function Cases() {
   ]
 
   return (
-    <section id="casos" className="py-24 md:py-32 bg-white">
+    <section id="casos" className="py-24 md:py-32 bg-[#f0f4f8]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <FadeIn>
           <SectionTitle
@@ -451,36 +452,36 @@ function Cases() {
         <div className="grid md:grid-cols-2 gap-6">
           {cases.map((c, i) => (
             <FadeIn key={i} delay={i * 100}>
-              <div className="group p-8 rounded-2xl bg-card border border-border hover:border-accent/30 transition-all hover:-translate-y-1 hover:shadow-lg">
+              <div className="group p-8 rounded-2xl bg-white border border-[#e2e8f0] hover:border-[#3A4C74]/30 transition-all hover:-translate-y-1 hover:shadow-lg">
                 <div className="flex flex-wrap gap-2 mb-6">
                   {c.tags.map((tag) => (
-                    <span key={tag} className="px-3 py-1 text-xs font-medium text-accent bg-accent/10 rounded-full">
+                    <span key={tag} className="px-3 py-1 text-xs font-medium text-[#3A4C74] bg-[#3A4C74]/10 rounded-full">
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <h3 className="text-xl font-semibold text-foreground mb-4">
+                <h3 className="text-xl font-semibold text-[#1a1a2e] mb-4">
                   {c.client}
                 </h3>
 
                 <div className="space-y-4 mb-8">
                   <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Desafío</p>
-                    <p className="text-muted-foreground text-sm">{c.challenge}</p>
+                    <p className="text-xs text-[#94a3b8] uppercase tracking-wider mb-1">Desafío</p>
+                    <p className="text-[#64748b] text-sm">{c.challenge}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Intervención</p>
-                    <p className="text-muted-foreground text-sm">{c.intervention}</p>
+                    <p className="text-xs text-[#94a3b8] uppercase tracking-wider mb-1">Intervención</p>
+                    <p className="text-[#64748b] text-sm">{c.intervention}</p>
                   </div>
                 </div>
 
-                <div className="pt-6 border-t border-border">
+                <div className="pt-6 border-t border-[#e2e8f0]">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-3xl md:text-4xl font-bold text-accent">
+                    <span className="text-3xl md:text-4xl font-bold text-[#3A4C74]">
                       {c.result}
                     </span>
-                    <span className="text-sm text-muted-foreground">
+                    <span className="text-sm text-[#64748b]">
                       {c.resultLabel}
                     </span>
                   </div>
@@ -503,7 +504,7 @@ function Process() {
   ]
 
   return (
-    <section id="proceso" className="py-24 md:py-32 bg-slate-50">
+    <section id="proceso" className="py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <FadeIn>
           <SectionTitle
@@ -515,17 +516,17 @@ function Process() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step, i) => (
             <FadeIn key={i} delay={i * 100}>
-              <div className="relative p-8 rounded-2xl bg-white border border-border h-full">
-                <div className="text-5xl font-bold text-accent/20 mb-4">
+              <div className="relative p-8 rounded-2xl bg-[#f8fafc] border border-[#e2e8f0] h-full">
+                <div className="text-5xl font-bold text-[#3A4C74]/20 mb-4">
                   {step.number}
                 </div>
-                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                  <step.icon className="w-5 h-5 text-accent" />
+                <div className="w-10 h-10 rounded-lg bg-[#3A4C74]/10 flex items-center justify-center mb-4">
+                  <step.icon className="w-5 h-5 text-[#3A4C74]" />
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-3">
+                <h3 className="text-lg font-semibold text-[#1a1a2e] mb-3">
                   {step.title}
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-[#64748b] text-sm leading-relaxed">
                   {step.desc}
                 </p>
               </div>
@@ -539,8 +540,8 @@ function Process() {
 
 function CTA() {
   return (
-    <section id="contacto" className="py-24 md:py-32 bg-[#223663] relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#3A4C74]/20 to-transparent" />
+    <section id="contacto" className="py-24 md:py-32 bg-[#3A4C74] relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#3A4C74] to-[#2a3c64]" />
       
       <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
         <FadeIn>
@@ -559,11 +560,11 @@ function CTA() {
 
         <FadeIn delay={300}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <a href="https://wa.me/595XXXXXXXX" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#223663] font-semibold rounded-lg hover:bg-blue-50 transition-all hover:scale-105">
+            <a href="https://wa.me/595XXXXXXXX" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#3A4C74] font-semibold rounded-lg hover:bg-blue-50 transition-all hover:scale-105 shadow-lg shadow-black/20">
               <MessageSquare className="w-5 h-5" />
               Agendar sesión estratégica
             </a>
-            <a href="mailto:contacto@equantum.com.py" className="inline-flex items-center gap-2 px-8 py-4 border border-blue-400/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-all">
+            <a href="mailto:contacto@equantum.com.py" className="inline-flex items-center gap-2 px-8 py-4 border border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-all">
               contacto@equantum.com.py
               <ArrowUpRight className="w-4 h-4" />
             </a>
@@ -593,7 +594,7 @@ function CTA() {
 
 function Footer() {
   return (
-    <footer className="py-12 bg-[#1a2a4a] border-t border-blue-800/30">
+    <footer className="py-12 bg-[#223663] border-t border-[#3A4C74]/30">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-2xl font-bold text-white tracking-tight">
