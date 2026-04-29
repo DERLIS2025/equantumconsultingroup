@@ -23,6 +23,10 @@ import {
   Mail,
   MapPin,
   ChevronDown,
+  Code2,
+  Store,
+  HeadphonesIcon,
+  Wrench,
 } from "lucide-react"
 
 function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
@@ -59,29 +63,41 @@ function RotatingText() {
     "Quedarse en el mismo lugar es retroceder.",
   ]
   const [current, setCurrent] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % phrases.length)
+      setIsAnimating(true)
+      setTimeout(() => {
+        setCurrent((prev) => (prev + 1) % phrases.length)
+        setIsAnimating(false)
+      }, 300)
     }, 4000)
     return () => clearInterval(interval)
   }, [])
 
   return (
-    <div className="h-8 md:h-10 overflow-hidden mb-6">
-      <div
-        className="transition-transform duration-500 ease-in-out"
-        style={{ transform: `translateY(-${current * 100}%)` }}
-      >
-        {phrases.map((phrase, i) => (
-          <div key={i} className="h-8 md:h-10 flex items-center">
-            <span className="text-lg md:text-xl font-semibold text-[#3A4C74] tracking-wide">
-              {phrase}
-            </span>
-          </div>
-        ))}
+    <div className="mb-6">
+      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#3A4C74]/10 border border-[#3A4C74]/20">
+        <span className={`text-lg md:text-xl font-semibold text-[#3A4C74] tracking-wide transition-opacity duration-300 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
+          {phrases[current]}
+        </span>
       </div>
     </div>
+  )
+}
+
+function WhatsAppFloat() {
+  return (
+    <a
+      href="https://wa.me/595985194953"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg shadow-green-500/30 hover:scale-110 transition-transform hover:shadow-xl"
+      aria-label="Contactar por WhatsApp"
+    >
+      <MessageSquare className="w-7 h-7 text-white" />
+    </a>
   )
 }
 
@@ -116,7 +132,7 @@ function Navbar() {
                 {link.label}
               </a>
             ))}
-            <a href="#contacto" className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#3A4C74] text-white text-sm font-semibold rounded-lg hover:bg-[#2a3c64] transition-colors">
+            <a href="https://wa.me/595985194953" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#3A4C74] text-white text-sm font-semibold rounded-lg hover:bg-[#2a3c64] transition-colors">
               Agendar sesión
               <ArrowRight className="w-4 h-4" />
             </a>
@@ -136,7 +152,7 @@ function Navbar() {
                 {link.label}
               </a>
             ))}
-            <a href="#contacto" className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#3A4C74] text-white text-sm font-semibold rounded-lg" onClick={() => setMobileOpen(false)}>
+            <a href="https://wa.me/595985194953" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#3A4C74] text-white text-sm font-semibold rounded-lg" onClick={() => setMobileOpen(false)}>
               Agendar sesión
               <ArrowRight className="w-4 h-4" />
             </a>
@@ -154,17 +170,21 @@ function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <FadeIn>
             <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3A4C74]/10 text-[#3A4C74] text-sm font-medium mb-6">
+                <Wrench className="w-4 h-4" />
+                Trabajo a medida
+              </div>
               <RotatingText />
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-[1.1] mb-6">
                 Arquitectura digital que{" "}
                 <span className="text-[#3A4C74]">convierte mejor</span> y escala con criterio.
               </h1>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed max-w-xl">
-                Transformamos tu presencia digital en un activo comercial: más credibilidad,
-                mejor jerarquía de propuesta y un sistema diseñado para generar demanda calificada.
+                No usamos plantillas. Cada proyecto es diseñado desde cero para tu negocio, 
+                tu mercado y tus objetivos comerciales concretos.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href="#contacto" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#3A4C74] text-white font-semibold rounded-lg hover:bg-[#2a3c64] transition-colors">
+                <a href="https://wa.me/595985194953" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#3A4C74] text-white font-semibold rounded-lg hover:bg-[#2a3c64] transition-colors">
                   Solicitar diagnóstico estratégico
                   <ArrowRight className="w-5 h-5" />
                 </a>
@@ -178,17 +198,21 @@ function Hero() {
 
           <FadeIn delay={200}>
             <div className="space-y-4">
-              <div className="flex items-center gap-3 p-4 rounded-lg border border-gray-200">
+              <div className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-[#3A4C74]/30 transition-colors">
                 <CheckCircle2 className="w-5 h-5 text-[#3A4C74]" />
                 <span className="text-gray-700">60+ Proyectos B2B/Ecommerce</span>
               </div>
-              <div className="flex items-center gap-3 p-4 rounded-lg border border-gray-200">
+              <div className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-[#3A4C74]/30 transition-colors">
                 <CheckCircle2 className="w-5 h-5 text-[#3A4C74]" />
                 <span className="text-gray-700">End-to-end: Estrategia + Diseño + Tech</span>
               </div>
-              <div className="flex items-center gap-3 p-4 rounded-lg border border-gray-200">
+              <div className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-[#3A4C74]/30 transition-colors">
                 <CheckCircle2 className="w-5 h-5 text-[#3A4C74]" />
                 <span className="text-gray-700">Entregable inicial en 10 días hábiles</span>
+              </div>
+              <div className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-[#3A4C74]/30 transition-colors">
+                <CheckCircle2 className="w-5 h-5 text-[#3A4C74]" />
+                <span className="text-gray-700">Trabajo a medida, sin plantillas</span>
               </div>
             </div>
           </FadeIn>
@@ -202,7 +226,7 @@ function Services() {
   const services = [
     {
       icon: BarChart3,
-      title: "Arquitectura Digital & Consultoría",
+      title: "Arquitectura Digital",
       desc: "Diagnóstico ejecutivo de activos y embudo digital. Definición de hoja de ruta por impacto y esfuerzo.",
     },
     {
@@ -212,23 +236,38 @@ function Services() {
     },
     {
       icon: ShoppingCart,
-      title: "Ecommerce y Canales de Venta",
+      title: "Ecommerce",
       desc: "Optimización de experiencia de compra y catálogo. Integraciones clave para operación y trazabilidad comercial.",
     },
     {
-      icon: Zap,
-      title: "Automatización, Datos y Performance",
-      desc: "Implementación de analítica y paneles para dirección. Automatizaciones para marketing, ventas y operaciones.",
-    },
-    {
-      icon: CheckCircle2,
-      title: "Sistemas de Aprobaciones y Gestión Interna",
-      desc: "Plataforma centralizada de flujos de aprobación. Trazabilidad completa, historial auditado, roles configurables.",
-    },
-    {
       icon: Layers,
-      title: "Consultoría e Integración mySAP ERP",
+      title: "mySAP ERP",
       desc: "Consultoría estratégica para soluciones mySAP ERP. Integración de procesos por rol + Solution Support continuo.",
+    },
+    {
+      icon: Store,
+      title: "Shopify",
+      desc: "Desarrollo de tiendas Shopify personalizadas. Temas a medida, apps privadas y optimización de conversión.",
+    },
+    {
+      icon: Globe,
+      title: "WordPress",
+      desc: "Sitios WordPress corporativos y funcionales. Plugins custom, performance optimizado y SEO técnico.",
+    },
+    {
+      icon: Code2,
+      title: "Desarrollo Propio",
+      desc: "Aplicaciones web y sistemas custom-built con Next.js, React, Node.js. Código limpio, escalable y mantenible.",
+    },
+    {
+      icon: HeadphonesIcon,
+      title: "Consultoría Integral",
+      desc: "Acompañamiento estratégico en transformación digital. Desde la idea hasta la operación y el crecimiento.",
+    },
+    {
+      icon: Wrench,
+      title: "Apoyo Comercial",
+      desc: "Soporte técnico continuo, capacitación de equipos y optimización de procesos post-implementación.",
     },
   ]
 
@@ -237,20 +276,25 @@ function Services() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <FadeIn>
           <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3A4C74]/10 text-[#3A4C74] text-sm font-medium mb-4">
+              <Wrench className="w-4 h-4" />
+              Trabajo a medida
+            </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Nuestros Servicios
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Capacidades para construir y escalar una operación digital seria
+              Capacidades para construir y escalar una operación digital seria. 
+              Nada de plantillas. Todo diseñado para tu negocio.
             </p>
           </div>
         </FadeIn>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, i) => (
-            <FadeIn key={i} delay={i * 100}>
-              <div className="group p-6 rounded-xl border border-gray-200 hover:border-[#3A4C74]/30 transition-all hover:-translate-y-1">
-                <div className="w-12 h-12 rounded-lg bg-[#3A4C74]/10 flex items-center justify-center mb-4">
+            <FadeIn key={i} delay={i * 75}>
+              <div className="group p-6 rounded-xl border border-gray-200 hover:border-[#3A4C74]/30 transition-all hover:-translate-y-1 hover:shadow-md">
+                <div className="w-12 h-12 rounded-lg bg-[#3A4C74]/10 flex items-center justify-center mb-4 group-hover:bg-[#3A4C74]/20 transition-colors">
                   <service.icon className="w-6 h-6 text-[#3A4C74]" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -273,7 +317,7 @@ function Stats() {
     { number: "60+", label: "Proyectos B2B/Ecommerce", suffix: "" },
     { number: "10", label: "Días hábiles", suffix: "entregable inicial" },
     { number: "3", label: "Pilares", suffix: "Estrategia + Diseño + Tech" },
-    { number: "100%", label: "Enfoque", suffix: "Conversión y escalabilidad" },
+    { number: "100%", label: "Trabajo a medida", suffix: "Sin plantillas" },
   ]
 
   return (
@@ -360,7 +404,7 @@ function Cases() {
               Explora Nuestro Portafolio
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Resultados aplicados a contextos reales de negocio
+              Resultados aplicados a contextos reales de negocio. Trabajo a medida, no plantillas.
             </p>
           </div>
         </FadeIn>
@@ -368,13 +412,19 @@ function Cases() {
         <div className="grid md:grid-cols-2 gap-6">
           {cases.map((c, i) => (
             <FadeIn key={i} delay={i * 100}>
-              <div className="group rounded-xl overflow-hidden border border-gray-200 hover:border-[#3A4C74]/30 transition-all hover:-translate-y-1">
-                <div className={`h-48 ${c.color} flex items-center justify-center`}>
+              <div className="group rounded-xl overflow-hidden border border-gray-200 hover:border-[#3A4C74]/30 transition-all hover:-translate-y-1 hover:shadow-lg">
+                <div className={`h-48 ${c.color} flex items-center justify-center relative overflow-hidden`}>
                   <span className="text-6xl font-bold text-gray-300">IMG</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
                 </div>
                 <div className="p-6">
-                  <div className="text-xs font-semibold text-[#3A4C74] uppercase tracking-wider mb-2">
-                    {c.type}
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs font-semibold text-[#3A4C74] uppercase tracking-wider">
+                      {c.type}
+                    </span>
+                    <span className="px-2 py-0.5 rounded-full bg-[#3A4C74]/10 text-[#3A4C74] text-xs font-medium">
+                      Trabajo a medida
+                    </span>
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">
                     {c.client}
@@ -425,8 +475,8 @@ function Process() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step, i) => (
             <FadeIn key={i} delay={i * 100}>
-              <div className="relative p-6 rounded-xl bg-white border border-gray-200 h-full">
-                <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-[#3A4C74] text-white flex items-center justify-center text-sm font-bold">
+              <div className="relative p-6 rounded-xl bg-white border border-gray-200 h-full hover:border-[#3A4C74]/30 transition-all hover:-translate-y-1">
+                <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-[#3A4C74] text-white flex items-center justify-center text-sm font-bold shadow-md">
                   {step.number}
                 </div>
                 <div className="w-10 h-10 rounded-lg bg-[#3A4C74]/10 flex items-center justify-center mb-4 mt-2">
@@ -453,7 +503,7 @@ function FAQ() {
   const faqs = [
     {
       question: "¿Qué servicios de consultoría digital ofrecen?",
-      answer: "Ofrecemos consultoría end-to-end: arquitectura digital, sitios corporativos B2B, ecommerce, automatización, sistemas de gestión interna e integración mySAP ERP.",
+      answer: "Ofrecemos consultoría end-to-end: arquitectura digital, sitios corporativos B2B, ecommerce, automatización, sistemas de gestión interna e integración mySAP ERP. Todo trabajo a medida, sin plantillas.",
     },
     {
       question: "¿Cuánto tiempo toma desarrollar un proyecto?",
@@ -487,19 +537,19 @@ function FAQ() {
         <div className="space-y-4">
           {faqs.map((faq, i) => (
             <FadeIn key={i} delay={i * 50}>
-              <div className="border border-gray-200 rounded-lg overflow-hidden">
+              <div className="border border-gray-200 rounded-lg overflow-hidden hover:border-[#3A4C74]/20 transition-colors">
                 <button
                   className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors"
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 >
                   <span className="font-medium text-gray-900">{faq.question}</span>
-                  <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform ${openIndex === i ? "rotate-180" : ""}`} />
+                  <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${openIndex === i ? "rotate-180" : ""}`} />
                 </button>
-                {openIndex === i && (
+                <div className={`overflow-hidden transition-all duration-300 ${openIndex === i ? "max-h-96" : "max-h-0"}`}>
                   <div className="p-4 pt-0 text-gray-600 text-sm leading-relaxed">
                     {faq.answer}
                   </div>
-                )}
+                </div>
               </div>
             </FadeIn>
           ))}
@@ -514,23 +564,36 @@ function CTA() {
     <section id="contacto" className="py-24 bg-white border-t border-gray-100">
       <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
         <FadeIn>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3A4C74]/10 text-[#3A4C74] text-sm font-medium mb-6">
+            <Wrench className="w-4 h-4" />
+            Trabajo a medida
+          </div>
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
             ¿Listo para{" "}
             <span className="text-[#3A4C74]">escalar tu operación digital</span>?
           </h2>
           <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
             Trabajamos contigo para entender tus necesidades y desarrollar soluciones
-            personalizadas que realmente marcan la diferencia.
+            personalizadas que realmente marcan la diferencia. Sin plantillas. Sin atajos.
           </p>
-          <a
-            href="https://wa.me/595XXXXXXXX"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-[#3A4C74] text-white font-semibold rounded-lg hover:bg-[#2a3c64] transition-all hover:scale-105"
-          >
-            <MessageSquare className="w-5 h-5" />
-            Agendar sesión estratégica
-          </a>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="https://wa.me/595985194953"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-[#3A4C74] text-white font-semibold rounded-lg hover:bg-[#2a3c64] transition-all hover:scale-105 shadow-lg shadow-[#3A4C74]/20"
+            >
+              <MessageSquare className="w-5 h-5" />
+              Agendar sesión estratégica
+            </a>
+            <a
+              href="mailto:contacto@equantum.com.py"
+              className="inline-flex items-center gap-2 px-8 py-4 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors"
+            >
+              <Mail className="w-5 h-5" />
+              contacto@equantum.com.py
+            </a>
+          </div>
         </FadeIn>
       </div>
     </section>
@@ -546,9 +609,13 @@ function Footer() {
             <div className="text-2xl font-bold mb-4">
               e<span className="text-blue-300">Quantum</span>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
               Arquitectura digital que convierte mejor y escala con criterio.
             </p>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3A4C74]/20 text-blue-300 text-xs font-medium">
+              <Wrench className="w-3 h-3" />
+              Trabajo a medida
+            </div>
           </div>
 
           <div>
@@ -568,6 +635,8 @@ function Footer() {
               <li>Sitios Corporativos B2B</li>
               <li>Ecommerce</li>
               <li>mySAP ERP</li>
+              <li>Shopify</li>
+              <li>WordPress</li>
             </ul>
           </div>
 
@@ -576,7 +645,7 @@ function Footer() {
             <ul className="space-y-3 text-sm text-gray-400">
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
-                <span>+595 981 000 000</span>
+                <span>+595 985 194 953</span>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
@@ -587,6 +656,15 @@ function Footer() {
                 <span>Asunción, Paraguay</span>
               </li>
             </ul>
+            <a 
+              href="https://wa.me/595985194953" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-green-500/20 text-green-400 rounded-lg hover:bg-green-500/30 transition-colors text-sm"
+            >
+              <MessageSquare className="w-4 h-4" />
+              WhatsApp directo
+            </a>
           </div>
         </div>
 
@@ -616,6 +694,7 @@ export default function Home() {
       <FAQ />
       <CTA />
       <Footer />
+      <WhatsAppFloat />
     </main>
   )
 }
