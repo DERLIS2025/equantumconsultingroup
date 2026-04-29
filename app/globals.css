@@ -1,3 +1,4 @@
+cat > app/globals.css << 'EOF'
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,15 +7,15 @@
 
 @layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #fafafa;
-    --accent: #00d4aa;
-    --accent-hover: #00b894;
-    --muted: #737373;
-    --muted-foreground: #a3a3a3;
-    --card: #171717;
-    --card-hover: #262626;
-    --border: #262626;
+    --background: #223663;
+    --foreground: #FFFFFF;
+    --accent: #3A4C74;
+    --accent-hover: #4A5C84;
+    --muted: #6B7FA3;
+    --muted-foreground: #9BAAC4;
+    --card: #2D3F5F;
+    --card-hover: #354A6B;
+    --border: #3A4C74;
   }
 
   * {
@@ -30,17 +31,18 @@
   }
 
   ::selection {
-    background-color: rgba(0, 212, 170, 0.3);
-    color: #fafafa;
+    background-color: rgba(58, 76, 116, 0.4);
+    color: #FFFFFF;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent to-emerald-400;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-[#9BAAC4];
   }
 
   .glass {
     @apply bg-white/5 backdrop-blur-xl border border-white/10;
   }
 }
+EOF

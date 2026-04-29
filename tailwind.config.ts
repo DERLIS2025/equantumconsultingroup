@@ -1,3 +1,4 @@
+cat > tailwind.config.ts << 'EOF'
 import type { Config } from "tailwindcss"
 
 const config: Config = {
@@ -9,15 +10,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#0a0a0a",
-        foreground: "#fafafa",
-        accent: "#00d4aa",
-        "accent-hover": "#00b894",
-        muted: "#737373",
-        "muted-foreground": "#a3a3a3",
-        card: "#171717",
-        "card-hover": "#262626",
-        border: "#262626",
+        background: "#223663",
+        foreground: "#FFFFFF",
+        accent: "#3A4C74",
+        "accent-hover": "#4A5C84",
+        muted: "#6B7FA3",
+        "muted-foreground": "#9BAAC4",
+        card: "#2D3F5F",
+        "card-hover": "#354A6B",
+        border: "#3A4C74",
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
@@ -42,3 +43,4 @@ const config: Config = {
 }
 
 export default config
+EOF
