@@ -2,47 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
 @layer base {
   :root {
     --background: #FFFFFF;
-    --foreground: #1a1a2e;
-    --accent: #3A4C74;
-    --accent-hover: #2a3c64;
-    --muted: #64748b;
-    --muted-foreground: #94a3b8;
-    --card: #f8fafc;
-    --card-hover: #f1f5f9;
-    --border: #e2e8f0;
-    --dark-bg: #223663;
-    --dark-card: #2D3F5F;
+    --foreground: #111827;
+    --accent: #091F51;
+    --muted: #4B5563;
+    --border: #E5E7EB;
+    --soft: #F3F6FB;
   }
 
-  * {
-    @apply border-border;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    @apply bg-background text-foreground font-sans antialiased;
-  }
-
-  ::selection {
-    background-color: rgba(58, 76, 116, 0.15);
-    color: #1a1a2e;
-  }
-}
-
-@layer utilities {
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#3A4C74] to-[#64748b];
-  }
-
-  .glass {
-    @apply bg-white/80 backdrop-blur-xl border border-border;
-  }
+  html { scroll-behavior: smooth; }
+  body { @apply bg-white text-[#111827] antialiased; }
 }

@@ -2,38 +2,32 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-})
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
 export const metadata: Metadata = {
-  title: "eQuantum | Arquitectura Digital para Empresas B2B",
+  metadataBase: new URL("https://equantumconsultingroupcompy.vercel.app"),
+  title: "Equantum Consulting Group | Soluciones digitales para empresas en Paraguay",
   description:
-    "Transformamos tu presencia digital en un activo comercial. Consultoría tecnológica senior, sitios corporativos, ecommerce, automatización e integración mySAP ERP.",
-  keywords: [
-    "consultoría digital",
-    "arquitectura digital",
-    "ecommerce B2B",
-    "mySAP ERP",
-    "automatización",
-    "Paraguay",
-  ],
-  authors: [{ name: "eQuantum" }],
+    "Diseñamos sitios web, ecommerce, sistemas e integraciones para empresas que necesitan vender mejor, ordenar su operación digital y escalar con criterio.",
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "eQuantum | Arquitectura Digital que Convierte",
+    title: "Equantum Consulting Group | Soluciones digitales para empresas en Paraguay",
     description:
-      "Más credibilidad, mejor jerarquía de propuesta y un sistema diseñado para generar demanda calificada.",
-    type: "website",
+      "Diseñamos sitios web, ecommerce, sistemas e integraciones para empresas que necesitan vender mejor, ordenar su operación digital y escalar con criterio.",
+    url: "/",
+    siteName: "Equantum Consulting Group",
     locale: "es_PY",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Equantum Consulting Group | Soluciones digitales para empresas en Paraguay",
+    description:
+      "Diseñamos sitios web, ecommerce, sistemas e integraciones para empresas que necesitan vender mejor, ordenar su operación digital y escalar con criterio.",
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={inter.variable}>
       <body className="font-sans">{children}</body>
