@@ -53,6 +53,38 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
   )
 }
 
+function RotatingText() {
+  const phrases = [
+    "Tu competencia no espera.",
+    "Quedarse en el mismo lugar es retroceder.",
+  ]
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % phrases.length)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <div className="h-8 md:h-10 overflow-hidden mb-6">
+      <div
+        className="transition-transform duration-500 ease-in-out"
+        style={{ transform: `translateY(-${current * 100}%)` }}
+      >
+        {phrases.map((phrase, i) => (
+          <div key={i} className="h-8 md:h-10 flex items-center">
+            <span className="text-lg md:text-xl font-semibold text-[#3A4C74] tracking-wide">
+              {phrase}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -122,6 +154,7 @@ function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <FadeIn>
             <div>
+              <RotatingText />
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-[1.1] mb-6">
                 Arquitectura digital que{" "}
                 <span className="text-[#3A4C74]">convierte mejor</span> y escala con criterio.
